@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import MainPage from './components/MainPage.js';
 
 function App() {
   return (
@@ -20,6 +20,6 @@ function App() {
       </header>
     </div>
   );
-}
+}S
 
 export default App;
