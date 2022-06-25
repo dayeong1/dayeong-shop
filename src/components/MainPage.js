@@ -1,27 +1,33 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
 
 const MainPage = () => {
-  let [products, setProducts] = React.useState([]);
-  const url =`https://546c0a94-ea04-42e0-8e83-badb01b043d7.mock.pstmn.io/products`;
+  const [products, setProducts] = React.useState([]);
+	React.useEffect(() => {
+		axios
+			.get("https://14021502-e60f-47ec-95c0-cee18b842771.mock.pstmn.io/products")
+			.then(function (result) {
+				const products = result.data.products;
+				setProducts(products);
+			})
+			.catch(function (error) {
+				console.log("에러발생:", error);
+			});
+	}, []);
 
 	React.useEffect(()=>{
     axios
-      .get(url)
+      .get("https://14021502-e60f-47ec-95c0-cee18b842771.mock.pstmn.io/products")
       .then((result) => {
-        products = result.data.products;
+        const products = result.data.products;
         setProducts(products)
       })
       .catch((error) => {
         console.log(`통신실패: ${error}`);
       });
     }, []);
-
-  {
-    products.map((product, idx)=>{
-      return()
-    });
-  }
       return (
         <>
           <div id="header">
@@ -38,17 +44,19 @@ const MainPage = () => {
                 {products.map((product, idx)=>{
                   return(
                     <div className="product-card" key={idx}>
-                      <div>
-                        <img className="product-img" src={product.imgURL} alt="" />
-                      </div>
-                      <div className="product-contents">
-                        <div className="product-name">{product.name}</div>
-                        <div className="product-price">{product.price}</div>
-                        <div className="product-seller">
-                          <img src="images/icons/avatar.png" alt="" className="" />
-                          <span>{product.seller}</span>
+                      <Link className="product-link" to={`/ProductPage/${idx}`}>
+                        <div>
+                          <img className="product-img" src={product.imageUrl} alt={product.name}/>
                         </div>
-                      </div>
+                        <div className="product-contents">
+                          <span className="product-name">{product.name}</span>
+                          <span className="product-price">{product.price}원</span>
+                          <div className="product-seller">
+                            <img className="product-avatar" src="images/icons/avatar.png"  alt={product.seller} / >
+                            <span>밥집</span>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
                   )
                 })}
