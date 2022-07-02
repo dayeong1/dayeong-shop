@@ -1,25 +1,30 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {  Link, Route, Routes, useNavigate } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import UploadPage from "./components/UploadPage";
 import ProductPage from "./components/ProductPage";
+import 'antd/dist/antd.css';
+import { DownloadOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 function App() {
+const Navigate=useNavigate();
   return (
     <React.Fragment>
       <div id="header">
         <div id="header-area">
-          <img src="images/icons/logo.png" alt="" />
+          <Link to="/" >
+            <img src="images/icons/logo.png" alt="" />
+          </Link>
+          <Button size="default" shape="round" icon={<DownloadOutlined />} onClick={() => Navigate('/UploadPage')}>업로드</Button>
         </div>
       </div>
-      <Router>
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/UploadPage" element={<UploadPage />}></Route>
           <Route path="/ProductPage/:id" element={<ProductPage />}></Route>
         </Routes>
-      </Router>
       <div id="footer">
         <a href="#">회사소개</a>
         <a href="#">이용약관</a>

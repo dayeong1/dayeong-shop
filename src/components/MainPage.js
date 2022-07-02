@@ -2,7 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
-import { waitForElementToBeRemoved } from "@testing-library/react";
+import 'antd/dist/antd.css';
+import { DownloadOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+
 
 const MainPage = () => {
   const [products, setProducts] = React.useState([]);

@@ -36,7 +36,8 @@ color:#333;
   width:1024px;
   height:100%;
   display:flex;
-  align-items:center
+  align-items:center;
+  justify-content: space-between;
 }
 #header-area>img{
   width:128px;
